@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, Mail, Github } from 'lucide-react';
+import { BookOpen, Mail } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   return (
@@ -55,13 +55,6 @@ export const Footer: React.FC = () => {
               >
                 <Mail size={18} />
                 <span>info@vintagelibrary.com</span>
-              </a>
-              <a 
-                href="https://github.com" 
-                className="flex items-center space-x-2 text-parchment-300 hover:text-gold-500 transition-colors"
-              >
-                <Github size={18} />
-                <span>Visit our Repository</span>
               </a>
             </div>
           </div>
