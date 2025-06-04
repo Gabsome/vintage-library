@@ -7,7 +7,7 @@ import { SignupPublisher } from './pages/SignupPublisher';
 import { BookDetails } from './pages/BookDetails';
 import { BrowseBooks } from './pages/BrowseBooks';
 import { Dashboard } from './pages/Dashboard';
-import UploadBook from './UploadBook'; 
+import UploadBook from './UploadBook';
 import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
@@ -21,6 +21,7 @@ function App() {
           <Route path="/signup/publisher" element={<SignupPublisher />} />
           <Route path="/books" element={<BrowseBooks />} />
           <Route path="/books/:id" element={<BookDetails />} />
+          <Route path="/upload-book" element={<UploadBook />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </BrowserRouter>
