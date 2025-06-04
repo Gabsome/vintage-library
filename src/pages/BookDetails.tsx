@@ -15,9 +15,8 @@ export const BookDetails: React.FC = () => {
   const [isReading, setIsReading] = useState(false);
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
-  
+
   useEffect(() => {
-    // Simulate API call to fetch book details
     const fetchBook = () => {
       setLoading(true);
       setTimeout(() => {
@@ -28,10 +27,9 @@ export const BookDetails: React.FC = () => {
         setLoading(false);
       }, 500);
     };
-    
     fetchBook();
   }, [id]);
-  
+
   if (loading) {
     return (
       <MainLayout>
@@ -43,7 +41,7 @@ export const BookDetails: React.FC = () => {
       </MainLayout>
     );
   }
-  
+
   if (!book) {
     return (
       <MainLayout>
@@ -69,23 +67,23 @@ export const BookDetails: React.FC = () => {
           {/* Book Overview */}
           <div className="flex flex-col lg:flex-row gap-8 mb-12">
             {/* Book Cover */}
-            <motion.div 
+            <motion.div
               className="lg:w-1/3 flex justify-center"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
               <div className="relative w-[250px] h-[375px] shadow-book rounded-md overflow-hidden border-4 border-gold-900/20">
-                <img 
-                  src={book.coverImage} 
-                  alt={`${book.title} cover`} 
+                <img
+                  src={book.coverImage}
+                  alt={`${book.title} cover`}
                   className="w-full h-full object-cover"
                 />
               </div>
             </motion.div>
-            
+
             {/* Book Details */}
-            <motion.div 
+            <motion.div
               className="lg:w-2/3"
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -93,27 +91,27 @@ export const BookDetails: React.FC = () => {
             >
               <div className="flex items-center space-x-2 mb-2">
                 {book.genre.map((genre, index) => (
-                  <span 
-                    key={index} 
+                  <span
+                    key={index}
                     className="inline-block bg-forest-800 text-parchment-500 px-3 py-1 rounded-full text-xs font-medium"
                   >
                     {genre}
                   </span>
                 ))}
               </div>
-              
+
               <h1 className="font-display text-3xl md:text-4xl font-bold text-forest-900 mb-2">
                 {book.title}
               </h1>
-              
+
               <p className="font-body text-xl text-forest-700 italic mb-4">
                 by {book.author}
               </p>
-              
+
               <div className="flex items-center mb-6">
                 <div className="flex items-center">
                   {[1, 2, 3, 4, 5].map((star) => (
-                    <Star 
+                    <Star
                       key={star}
                       size={20}
                       className={`${star <= book.rating ? 'text-gold-900 fill-gold-900' : 'text-gold-900/30'} mr-1`}
@@ -124,7 +122,7 @@ export const BookDetails: React.FC = () => {
                   {book.rating.toFixed(1)} ({book.reviews.length} {book.reviews.length === 1 ? 'review' : 'reviews'})
                 </span>
               </div>
-              
+
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
                 <div className="flex items-center space-x-2 text-forest-700">
                   <Calendar size={18} />
@@ -139,17 +137,17 @@ export const BookDetails: React.FC = () => {
                   <span>~4.5 hours</span>
                 </div>
               </div>
-              
+
               <div className="mb-8">
                 <h3 className="font-display font-bold text-xl text-forest-900 mb-2">Description</h3>
                 <p className="font-body text-forest-800 leading-relaxed">
                   {book.description}
                 </p>
               </div>
-              
+
               <div className="flex flex-wrap gap-4">
-                <Button 
-                  onClick={() => setIsReading(!isReading)} 
+                <Button
+                  onClick={() => setIsReading(!isReading)}
                   variant={isReading ? "secondary" : "primary"}
                   size="lg"
                 >
@@ -161,10 +159,10 @@ export const BookDetails: React.FC = () => {
               </div>
             </motion.div>
           </div>
-          
+
           {/* Book Preview */}
           {isReading && (
-            <motion.div 
+            <motion.div
               className="mb-16"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -174,7 +172,7 @@ export const BookDetails: React.FC = () => {
               <div className="bg-parchment-100 border border-sepia-300 rounded-lg p-8 shadow-md font-body text-forest-900 leading-relaxed">
                 <p className="text-center font-display text-xl mb-6">{book.title}</p>
                 <p className="text-center font-body italic mb-12">by {book.author}</p>
-                
+
                 <p className="mb-4 indent-8">
                   It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.
                 </p>
@@ -197,24 +195,24 @@ export const BookDetails: React.FC = () => {
               </div>
             </motion.div>
           )}
-          
+
           {/* Reviews Section */}
           <div>
             <OrnateHeading className="mb-6">Reviews & Ratings</OrnateHeading>
-            
+
             {/* Rate this book */}
             <div className="bg-parchment-100 border border-sepia-300 rounded-lg p-6 shadow-md mb-8">
               <h3 className="font-display font-bold text-lg text-forest-900 mb-4">Rate this book</h3>
               <div className="flex items-center space-x-1 mb-4">
                 {[1, 2, 3, 4, 5].map((star) => (
-                  <button 
+                  <button
                     key={star}
                     onMouseEnter={() => setHoverRating(star)}
                     onMouseLeave={() => setHoverRating(0)}
                     onClick={() => setRating(star)}
                     className="focus:outline-none"
                   >
-                    <Star 
+                    <Star
                       size={24}
                       className={`${(hoverRating || rating) >= star ? 'text-gold-900 fill-gold-900' : 'text-gold-900/30'}`}
                     />
@@ -230,52 +228,34 @@ export const BookDetails: React.FC = () => {
               />
               <Button>Submit Review</Button>
             </div>
-            
+
             {/* Reviews List */}
             {book.reviews.length > 0 ? (
               <div className="space-y-6">
                 {book.reviews.map((review) => (
-                  <div 
-                    key={review.id} 
-                    className="bg-parchment-50 border border-sepia-200 rounded-lg p-6 shadow-sm"
+                  <div
+                    key={review.id}
+                    className="bg-parchment-50 border border-sepia-200 rounded-lg p-4 shadow-sm"
                   >
-                    <div className="flex items-start">
-                      <div className="mr-4">
-                        <div className="w-10 h-10 bg-forest-900 rounded-full flex items-center justify-center text-parchment-500">
-                          <User size={20} />
-                        </div>
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-display font-bold text-forest-900">{review.userName}</h4>
-                          <span className="text-sm text-forest-700">
-                            {new Date(review.date).toLocaleDateString()}
-                          </span>
-                        </div>
-                        
-                        <div className="flex items-center mb-3">
-                          {[1, 2, 3, 4, 5].map((star) => (
-                            <Star 
-                              key={star}
-                              size={16}
-                              className={`${star <= review.rating ? 'text-gold-900 fill-gold-900' : 'text-gold-900/30'} mr-0.5`}
-                            />
-                          ))}
-                        </div>
-                        
-                        <p className="font-body text-forest-800">
-                          {review.comment}
-                        </p>
-                      </div>
+                    <div className="flex items-center space-x-2 mb-1">
+                      <User size={16} className="text-forest-700" />
+                      <span className="font-semibold text-forest-800">{review.reviewer}</span>
                     </div>
+                    <div className="flex items-center space-x-1 mb-2">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <Star
+                          key={star}
+                          size={16}
+                          className={`${review.rating >= star ? 'text-gold-900 fill-gold-900' : 'text-gold-900/30'}`}
+                        />
+                      ))}
+                    </div>
+                    <p className="text-forest-800">{review.text}</p>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="text-center py-8 bg-parchment-50 border border-sepia-200 rounded-lg">
-                <p className="font-body text-forest-700 mb-2">No reviews yet.</p>
-                <p className="font-body text-forest-700">Be the first to leave a review!</p>
-              </div>
+              <p className="text-forest-700">No reviews yet. Be the first to review this book!</p>
             )}
           </div>
         </div>
