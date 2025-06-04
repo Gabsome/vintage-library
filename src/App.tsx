@@ -7,6 +7,7 @@ import { SignupPublisher } from './pages/SignupPublisher';
 import { BookDetails } from './pages/BookDetails';
 import { BrowseBooks } from './pages/BrowseBooks';
 import { Dashboard } from './pages/Dashboard';
+import UploadBook from './UploadBook'; 
 import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
